@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Typewriter from "./TypeWriter";
 
 export default function Hero() {
   return (
@@ -17,19 +18,20 @@ export default function Hero() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2 }}
         className="mt-4 text-lg"
+        style={{ minHeight: "2em" }}
       >
-        Transform your text in seconds. Simplify, Beautify, and Optimize.
+        <Typewriter text="Transform your text in seconds. Simplify, Beautify, and Optimize." />
       </motion.p>
-      <Link href={'/utils/textutils'}>
-      <motion.button
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.3 }}
-        className="mt-8 bg-yellow-400 text-black px-6 py-3 rounded-lg shadow-lg"
-      >
-        Get Started
-      </motion.button>
+      <Link href={"/utils/textutils"}>
+        <motion.button
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
+          className="mt-8 bg-yellow-400 text-black px-6 py-3 rounded-lg shadow-lg"
+        >
+          Get Started
+        </motion.button>
       </Link>
     </div>
   );
