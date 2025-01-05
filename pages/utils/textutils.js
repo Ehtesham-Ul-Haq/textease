@@ -4,6 +4,7 @@ const TextUtils = () => {
   const [text, setText] = useState("");
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
+  const [textStyle, setTextStyle] = useState({});
 
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -12,10 +13,68 @@ const TextUtils = () => {
   const wordCount = text.length > 0 ? text.trim().split(/\s+/).length : 0;
   const charCount = typeof text === "string" ? text.length : 0;
 
+  const readingTime = () => {
+    const wordsPerMinute = 200; // Average reading speed
+    return (wordCount / wordsPerMinute).toFixed(2);
+  };
+
   const saveForUndo = () => {
     setUndoStack((prevStack) => [...prevStack, text]);
     setRedoStack([]); // Clear redo stack when new change is made
   };
+
+  const fonts = [
+    "Arial",
+    "Verdana",
+    "Helvetica",
+    "Georgia",
+    "Times New Roman",
+    "Courier New",
+    "Trebuchet MS",
+    "Lucida Sans",
+    "Tahoma",
+    "Calibri",
+    "Cambria",
+    "Garamond",
+    "Comic Sans MS",
+    "Century Gothic",
+    "Franklin Gothic Medium",
+    "Palatino Linotype",
+    "Book Antiqua",
+    "Candara",
+    "Impact",
+    "Roboto",
+    "Open Sans",
+    "Lato",
+    "Montserrat",
+    "Oswald",
+    "Raleway",
+    "Poppins",
+    "Ubuntu",
+    "Merriweather",
+    "Noto Sans",
+    "Playfair Display",
+    "PT Serif",
+    "Fira Sans",
+    "Droid Sans",
+    "Titillium Web",
+    "Source Sans Pro",
+    "Slabo 27px",
+    "Inconsolata",
+    "Josefin Sans",
+    "Caveat",
+    "Quicksand",
+    "Asap",
+    "Exo",
+    "Varela Round",
+    "Anton",
+    "Archivo",
+    "Mukta",
+    "Lora",
+    "Work Sans",
+    "Arvo",
+    "Cormorant Garamond",
+  ];
 
   const handleUpClick = () => {
     saveForUndo();
@@ -191,7 +250,51 @@ const TextUtils = () => {
     }
   };
 
-        
+  const changeFontFamily = (fontFamily) => {
+    saveForUndo();
+    setTextStyle((prevStyle) => ({
+      ...prevStyle,
+      fontFamily: fontFamily,
+    }));
+  };
+
+  const changeFontSize = (fontSize) => {
+    saveForUndo();
+    setTextStyle((prevStyle) => ({
+      ...prevStyle,
+      fontSize: fontSize,
+    }));
+  };
+
+  const setTextAlignment = (alignment) => {
+    saveForUndo();
+    setTextStyle((prevStyle) => ({
+      ...prevStyle,
+      textAlign: alignment,
+    }));
+  };
+
+  const highlightText = () => {
+    saveForUndo();
+    const highlightedText = text.replace(/\b(\w+)\b/g, "<mark>$1</mark>");
+    setText(highlightedText);
+  };
+
+  const handleFindAndReplace = () => {
+    const find = prompt("Enter the word you want to find:");
+    const replace = prompt("Enter the word you want to replace it with:");
+
+    if (find && replace !== null) {
+      findAndReplace(find, replace);
+    }
+  };
+
+  const findAndReplace = (find, replace) => {
+    saveForUndo();
+    const newText = text.replace(new RegExp(find, 'g'), replace);
+    setText(newText);
+  };
+  
 
   const functionButtonNames = [
     "Convert to UpperCase",
@@ -212,6 +315,8 @@ const TextUtils = () => {
     "Start Listening",
     "Undo Action",
     "Redo Action",
+    "Highlight Text",
+    "Find and Replace",
   ];
 
   const functionHandlers = [
@@ -233,6 +338,8 @@ const TextUtils = () => {
     handleSpeechRecognition,
     undo,
     redo,
+    highlightText,
+    handleFindAndReplace,
   ];
 
   return (
@@ -248,11 +355,7 @@ const TextUtils = () => {
           </span>
 
           <span className="absolute bottom-0 right-0 text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-l-full text-sm px-5 text-center">
-            {0.008 *
-              text.split(" ").filter((element) => {
-                return element.length !== 0;
-              }).length}{" "}
-            Minutes to read
+            {readingTime()} Minutes to read
           </span>
         </div>
         <textarea
@@ -261,6 +364,9 @@ const TextUtils = () => {
           onChange={handleOnChange}
           placeholder="Enter your text here"
           rows={5}
+          style={textStyle}
+          spellCheck={true}  // Enables browser spell check
+
         />
       </div>
       <div className="grid grid-cols-3 gap-2 items-center mx-auto w-1/2">
@@ -268,7 +374,7 @@ const TextUtils = () => {
           <button
             key={index}
             disabled={text.length === 0}
-            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+            className={`relative group text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
               text.length === 0
                 ? "opacity-50 cursor-not-allowed"
                 : "cursor-pointer"
@@ -276,16 +382,68 @@ const TextUtils = () => {
             onClick={functionHandlers[index]}
           >
             {name}
+            <span className="absolute bottom-full mb-1 hidden group-hover:block bg-gray-600 text-white text-xs rounded px-2 py-1">
+              {name}
+            </span>
           </button>
         ))}
+        
       </div>
+      <div className="grid grid-cols-3 gap-2 items-center mx-auto w-1/2">
+          <select
+            onChange={(e) => changeFontFamily(e.target.value)}
+            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+              text.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+          >
+            {fonts.map((font) => (
+              <option className="text-pink-600" key={font} value={font}>
+                Font Family - {font}
+              </option>
+            ))}
+          </select>
+          <input
+            type="number"
+            placeholder="Enter Font Size"
+            onChange={(e) => changeFontSize(`${e.target.value}px`)}
+            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+              text.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+          />
+          <select
+            onChange={(e) => setTextAlignment(e.target.value)}
+            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+              text.length === 0
+                ? "opacity-50 cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+          >
+            <option className="text-pink-600" value="Left">
+              Left
+            </option>
+            <option className="text-pink-600" value="Right">
+              Right
+            </option>
+            <option className="text-pink-600" value="Center">
+              Center
+            </option>
+          </select>
+        </div>
       <div className="w-1/2 mx-auto my-2">
-        <h3 className="text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-full  px-5 text-center">
+        <h3 className="text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 font-medium rounded-full px-5 text-center">
           Preview
         </h3>
-        <p className="my-2">
+        <div
+          className="border p-2 rounded h-40 overflow-y-auto bg-gray-50"
+          style={textStyle}
+        >
           {text.length > 0 ? text : "Enter text in the textbox to Preview"}
-        </p>
+        </div>
+        
       </div>
     </div>
   );
