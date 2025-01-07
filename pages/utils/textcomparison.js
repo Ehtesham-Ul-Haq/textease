@@ -11,13 +11,17 @@ const CompareText = () => {
     setResult(diff);
   };
 
-  const saveTextAsFile = (filename) => {
-    const blob = new Blob([result], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
+  const saveTextAsFile = () => {
+    const filename = prompt("Please enter the filename:", "comparison_result.txt");
+    if (filename) {
+      const blob = new Blob([result.map(part => part.value).join("")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+    }
   };
+  
 
   return (
     <div className="flex flex-col items-center justify-center px-4">

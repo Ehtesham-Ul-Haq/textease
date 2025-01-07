@@ -295,14 +295,16 @@ const TextUtils = () => {
     setText(newText);
   };
 
-  const saveTextAsFile = (filename) => {
+  const saveTextAsFile = () => {
+    const filename = prompt("Please enter the filename:", "comparison_result.txt");
+    if (filename) {
     const blob = new Blob([text], { type: 'text/plain' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = filename;
     link.click();
-  }
-  
+    }
+  }  
   
 
   const functionButtonNames = [

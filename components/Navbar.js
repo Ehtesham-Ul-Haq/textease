@@ -1,7 +1,9 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
+  const [dropdown1, setDropdown1] = useState(false);
+
   return (
     <div className="w-full flex items-center justify-between border-b mb-2">
       <div className="mx-2">
@@ -12,24 +14,45 @@ const Navbar = () => {
         </Link>{" "}
       </div>
       <div>
-        <ul className="flex items-center space-x-2">
-          <Link href={"/utils/textutils"} className="hover:text-pink-600">
-            <li>TextUtils</li>
-          </Link>
-          <Link href={"/utils/textcomparison"} className="hover:text-pink-600">
-            <li>Compare Text</li>
-          </Link>
-          <Link href={"/utils/qrcodegenerator"} className="hover:text-pink-600">
-            <li>Generate QRCode</li>
-          </Link>
-          <Link href={"/utils/wordcloud"} className="hover:text-pink-600">
-            <li>Word Cloud</li>
-          </Link>
-          <Link href={"/utils/JSONMaker"} className="hover:text-pink-600">
-            <li>JSON Maker</li>
-          </Link>
+<ul className="flex items-center space-x-2">
+  <li className="group relative">
+    Utils
+    <ul className="absolute top-6 -left-6-0 w-96 hidden group-hover:block bg-white space-y-2 shadow-lg rounded-md p-2">
+      <Link href={"/utils/textutils"} className="block hover:text-pink-600 border border-black px-2">
+        <li>TextUtils</li>
+      </Link>
+      <Link href={"/utils/textcomparison"} className="block hover:text-pink-600 border border-black px-2">
+        <li>Compare Text</li>
+      </Link>
+      <Link href={"/utils/qrcodegenerator"} className="block hover:text-pink-600 border border-black px-2">
+        <li>Generate QRCode</li>
+      </Link>
+      <Link href={"/utils/wordcloud"} className="block hover:text-pink-600 border border-black px-2">
+        <li>Word Cloud</li>
+      </Link>
+      <Link href={"/utils/encryptdecrypt"} className="block hover:text-pink-600 border border-black px-2">
+        <li>Encrypt & Decrypt</li>
+      </Link>
+      <Link href={"/utils/markdown"} className="block hover:text-pink-600 border border-black px-2">
+        <li>Markdown</li>
+      </Link>
+      <Link href={"/utils/JSONMaker"} className="block hover:text-pink-600 border border-black px-2">
+        <li>JSON Maker</li>
+      </Link>
+      <Link href={"/utils/htmltoimage"} className="block hover:text-pink-600 border border-black px-2">
+        <li>Html to Image</li>
+      </Link>
+    </ul>
+  </li>
+
           <Link href={"/utils/Base64"} className="hover:text-pink-600">
             <li>Base64 Converter</li>
+          </Link>
+          <Link href={"/utils/imagetotext"} className="hover:text-pink-600">
+            <li>Image to Text</li>
+          </Link>
+          <Link href={"/utils/urlshortener"} className="hover:text-pink-600">
+            <li>URL Shortener</li>
           </Link>
           <Link href={"/about"} className="hover:text-pink-600">
             <li>About Us</li>

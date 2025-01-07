@@ -10,8 +10,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Custom colors for markdown rendering
+        'markdown-header': '#4F46E5',
+      },
+      fontSize: {
+        'md-preview': '1.125rem', // Custom font size for markdown content
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'), // This plugin enables the `prose` class
+  ],
 };
