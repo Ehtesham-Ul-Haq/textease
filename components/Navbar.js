@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="mx-2">
         <Link href={"/"}>
           <h1 className="text-3xl font-extrabold font-serif bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 text-transparent bg-clip-text animate-pulse drop-shadow-md">
-           Text<span className="italic">Ease</span>
+            Text<span className="italic">Ease</span>
           </h1>
         </Link>{" "}
       </div>
@@ -15,6 +15,15 @@ const Navbar = () => {
         <ul className="flex items-center space-x-2">
           <Link href={"/utils/textutils"} className="hover:text-pink-600">
             <li>TextUtils</li>
+          </Link>
+          <Link href={"/utils/textcomparison"} className="hover:text-pink-600">
+            <li>Compare Text</li>
+          </Link>
+          <Link href={"/utils/qrcodegenerator"} className="hover:text-pink-600">
+            <li>Generate QRCode</li>
+          </Link>
+          <Link href={"/utils/wordcloud"} className="hover:text-pink-600">
+            <li>Word Cloud</li>
           </Link>
           <Link href={"/utils/JSONMaker"} className="hover:text-pink-600">
             <li>JSON Maker</li>

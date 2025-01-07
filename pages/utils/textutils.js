@@ -294,6 +294,15 @@ const TextUtils = () => {
     const newText = text.replace(new RegExp(find, 'g'), replace);
     setText(newText);
   };
+
+  const saveTextAsFile = (filename) => {
+    const blob = new Blob([text], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+  }
+  
   
 
   const functionButtonNames = [
@@ -317,6 +326,7 @@ const TextUtils = () => {
     "Redo Action",
     "Highlight Text",
     "Find and Replace",
+    "Save as Text File",
   ];
 
   const functionHandlers = [
@@ -340,12 +350,13 @@ const TextUtils = () => {
     redo,
     highlightText,
     handleFindAndReplace,
+    saveTextAsFile,
   ];
 
   return (
     <div>
       <div className="w-1/2 mx-auto">
-        <h2 className="text-2xl text-center mt-4 mb-6">
+        <h2 className="text-4xl font-bold text-pink-600 mb-8 text-center mt-4">
           TextEase - a Text Utility app
         </h2>
         <div className="relative">
@@ -359,7 +370,7 @@ const TextUtils = () => {
           </span>
         </div>
         <textarea
-          className="w-full border border-gray-200 rounded p-2 overflow-y-hidden"
+          className="border-2 border-pink-500 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none w-full rounded p-2 overflow-y-hidden"
           value={text}
           onChange={handleOnChange}
           placeholder="Enter your text here"
