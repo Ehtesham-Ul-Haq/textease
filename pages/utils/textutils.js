@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { syllable } from "syllable";
+import { jsPDF } from 'jspdf';
 
 const TextUtils = () => {
   const [text, setText] = useState("");
@@ -16,6 +18,10 @@ const TextUtils = () => {
   const readingTime = () => {
     const wordsPerMinute = 200; // Average reading speed
     return (wordCount / wordsPerMinute).toFixed(2);
+  };
+
+  const countSyllables = () => {
+    return syllable(text);
   };
 
   const saveForUndo = () => {
@@ -291,20 +297,69 @@ const TextUtils = () => {
 
   const findAndReplace = (find, replace) => {
     saveForUndo();
-    const newText = text.replace(new RegExp(find, 'g'), replace);
+    const newText = text.replace(new RegExp(find, "g"), replace);
     setText(newText);
   };
 
   const saveTextAsFile = () => {
-    const filename = prompt("Please enter the filename:", "comparison_result.txt");
+    const filename = prompt(
+      "Please enter the filename:",
+      "comparison_result.txt"
+    );
     if (filename) {
-    const blob = new Blob([text], { type: 'text/plain' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
+      const blob = new Blob([text], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
     }
-  }  
+  };
+
+  const boldText = () => {
+    saveForUndo();
+    const newText = `<b>${text}</b>`;
+    setText(newText);
+  };
+
+  const italicizeText = () => {
+    saveForUndo();
+    const newText = `<i>${text}</i>`;
+    setText(newText);
+  };
+
+  const underlineText = () => {
+    saveForUndo();
+    const newText = `<u>${text}</u>`;
+    setText(newText);
+  };
+
+
+const textToPDF = () => {
+ const filename = prompt(
+      "Please enter the filename:",
+      "comparison_result.pdf"
+    );
+    if (filename) {
+  const doc = new jsPDF();
+  doc.text(text, 10, 10);
+  doc.save(`${filename}.pdf`);
+  }
+}
+
+function textToCSV() {
+  const filename = prompt(
+    "Please enter the filename:",
+    "csv_result.csv"
+  );
+  if (filename) {
+  const csv = text.split('\n').map(row => row.split(' ').join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'data.csv';
+  link.click();
+  }
+}
   
 
   const functionButtonNames = [
@@ -329,6 +384,11 @@ const TextUtils = () => {
     "Highlight Text",
     "Find and Replace",
     "Save as Text File",
+    "<b>Bold Text</b>",
+    "<i>Italic Text</i>",
+    "<u>Underline Text</u>",
+    "Text to PDF",
+    "Text to CSV/Excel",
   ];
 
   const functionHandlers = [
@@ -353,6 +413,11 @@ const TextUtils = () => {
     highlightText,
     handleFindAndReplace,
     saveTextAsFile,
+    boldText,
+    italicizeText,
+    underlineText,
+    textToPDF,
+    textToCSV,
   ];
 
   return (
@@ -363,13 +428,13 @@ const TextUtils = () => {
         </h2>
         <div className="relative">
           {/* <h2>Your text Summary</h2> */}
-          <span className="absolute bottom-0 left-0 text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-r-full text-sm px-5 text-center">
-            {wordCount} words and {charCount} Characters
+          <span className="absolute bottom-1 left-0 text-white shadow-lg dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-full text-[12px] text-center justify-between flex w-full">
+            <span className="bg-lime-600 px-4 rounded-full">{wordCount} words and {charCount} Characters</span>
+            <span className="bg-lime-600 px-4 rounded-full">{countSyllables()} Syllables</span>
+            <span className="bg-lime-600 px-4 rounded-full">{readingTime()} Minutes to read</span>
           </span>
 
-          <span className="absolute bottom-0 right-0 text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-l-full text-sm px-5 text-center">
-            {readingTime()} Minutes to read
-          </span>
+
         </div>
         <textarea
           className="border-2 border-pink-500 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none w-full rounded p-2 overflow-y-hidden"
@@ -378,8 +443,7 @@ const TextUtils = () => {
           placeholder="Enter your text here"
           rows={5}
           style={textStyle}
-          spellCheck={true}  // Enables browser spell check
-
+          spellCheck={true} // Enables browser spell check
         />
       </div>
       <div className="grid grid-cols-3 gap-2 items-center mx-auto w-1/2">
@@ -400,63 +464,61 @@ const TextUtils = () => {
             </span>
           </button>
         ))}
-        
       </div>
       <div className="grid grid-cols-3 gap-2 items-center mx-auto w-1/2">
-          <select
-            onChange={(e) => changeFontFamily(e.target.value)}
-            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
-              text.length === 0
-                ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer"
-            }`}
-          >
-            {fonts.map((font) => (
-              <option className="text-pink-600" key={font} value={font}>
-                Font Family - {font}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            placeholder="Enter Font Size"
-            onChange={(e) => changeFontSize(`${e.target.value}px`)}
-            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
-              text.length === 0
-                ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer"
-            }`}
-          />
-          <select
-            onChange={(e) => setTextAlignment(e.target.value)}
-            className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
-              text.length === 0
-                ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer"
-            }`}
-          >
-            <option className="text-pink-600" value="Left">
-              Left
+        <select
+          onChange={(e) => changeFontFamily(e.target.value)}
+          className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+            text.length === 0
+              ? "opacity-50 cursor-not-allowed"
+              : "cursor-pointer"
+          }`}
+        >
+          {fonts.map((font) => (
+            <option className="text-pink-600" key={font} value={font}>
+              Font Family - {font}
             </option>
-            <option className="text-pink-600" value="Right">
-              Right
-            </option>
-            <option className="text-pink-600" value="Center">
-              Center
-            </option>
-          </select>
-        </div>
+          ))}
+        </select>
+        <input
+          type="number"
+          placeholder="Enter Font Size"
+          onChange={(e) => changeFontSize(`${e.target.value}px`)}
+          className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+            text.length === 0
+              ? "opacity-50 cursor-not-allowed"
+              : "cursor-pointer"
+          }`}
+        />
+        <select
+          onChange={(e) => setTextAlignment(e.target.value)}
+          className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+            text.length === 0
+              ? "opacity-50 cursor-not-allowed"
+              : "cursor-pointer"
+          }`}
+        >
+          <option className="text-pink-600" value="Left">
+            Left
+          </option>
+          <option className="text-pink-600" value="Right">
+            Right
+          </option>
+          <option className="text-pink-600" value="Center">
+            Center
+          </option>
+        </select>
+      </div>
       <div className="w-1/2 mx-auto my-2">
         <h3 className="text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 font-medium rounded-full px-5 text-center">
           Preview
         </h3>
         <div
-          className="border p-2 rounded h-40 overflow-y-auto bg-gray-50"
+          className="mt-10 p-6 border-2 border-lime-500 rounded-lg bg-white shadow-lg w-full max-w-3xl"
           style={textStyle}
         >
           {text.length > 0 ? text : "Enter text in the textbox to Preview"}
         </div>
-        
       </div>
     </div>
   );

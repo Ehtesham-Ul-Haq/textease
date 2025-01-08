@@ -15,32 +15,35 @@ const Navbar = () => {
       </div>
       <div>
 <ul className="flex items-center space-x-2">
-  <li className="group relative">
+  <li className="group relative hover:text-pink-600">
     Utils
-    <ul className="absolute top-6 -left-6-0 w-96 hidden group-hover:block bg-white space-y-2 shadow-lg rounded-md p-2">
-      <Link href={"/utils/textutils"} className="block hover:text-pink-600 border border-black px-2">
+    <ul className="absolute top-6 -left-6-0 w-96 hidden group-hover:block bg-white space-y-2 shadow-lg rounded-md p-2 z-50">
+      <Link href={"/utils/textutils"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>TextUtils</li>
       </Link>
-      <Link href={"/utils/textcomparison"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/textcomparison"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>Compare Text</li>
       </Link>
-      <Link href={"/utils/qrcodegenerator"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/qrcodegenerator"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>Generate QRCode</li>
       </Link>
-      <Link href={"/utils/wordcloud"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/wordcloud"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>Word Cloud</li>
       </Link>
-      <Link href={"/utils/encryptdecrypt"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/encryptdecrypt"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>Encrypt & Decrypt</li>
       </Link>
-      <Link href={"/utils/markdown"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/markdown"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>Markdown</li>
       </Link>
-      <Link href={"/utils/JSONMaker"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/JSONMaker"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>JSON Maker</li>
       </Link>
-      <Link href={"/utils/htmltoimage"} className="block hover:text-pink-600 border border-black px-2">
+      <Link href={"/utils/htmltoimage"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
         <li>Html to Image</li>
+      </Link>
+      <Link href={"/utils/texttoemoji"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
+        <li>Text to Emoji</li>
       </Link>
     </ul>
   </li>
