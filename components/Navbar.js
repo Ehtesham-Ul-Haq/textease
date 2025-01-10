@@ -1,90 +1,185 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FiMenu, FiX } from "react-icons/fi";
+import { FaArrowDown, FaPhoneAlt, FaShareAlt } from "react-icons/fa";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { FaArrowDown19 } from "react-icons/fa6";
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUtilsOpen, setIsUtilsOpen] = useState(false);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <div className="w-full flex items-center justify-between border-b mb-2">
-      <div className="mx-2">
-        <Link href={"/"}>
-          <h1 className="text-3xl font-extrabold font-serif bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 text-transparent bg-clip-text animate-pulse drop-shadow-md">
-            Text<span className="italic">Ease</span>
-          </h1>
-        </Link>{" "}
-      </div>
-      <div>
-<ul className="flex items-center space-x-2">
-  <li className="group relative hover:text-pink-600">
-    Utils
-    <ul className="absolute top-6 -left-6-0 w-96 hidden group-hover:block bg-white space-y-2 shadow-lg rounded-md p-2 z-50">
-      <Link href={"/utils/textutils"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>TextUtils</li>
-      </Link>
-      <Link href={"/utils/textcomparison"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Compare Text</li>
-      </Link>
-      <Link href={"/utils/qrcodegenerator"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Generate QRCode</li>
-      </Link>
-      <Link href={"/utils/wordcloud"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Word Cloud</li>
-      </Link>
-      <Link href={"/utils/encryptdecrypt"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Encrypt & Decrypt</li>
-      </Link>
-      <Link href={"/utils/markdown"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Markdown</li>
-      </Link>
-      <Link href={"/utils/JSONMaker"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>JSON Maker</li>
-      </Link>
-      <Link href={"/utils/htmltoimage"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Html to Image</li>
-      </Link>
-      <Link href={"/utils/texttoemoji"} className="block hover:bg-pink-600 hover:text-white border border-black px-2">
-        <li>Text to Emoji</li>
-      </Link>
-    </ul>
-  </li>
+    <nav className="w-full border-b shadow-sm">
+      {/* Top Navbar */}
+      <div className="flex items-center justify-between px-6 py-4">
+        {/* Brand */}
+        <div>
+          <Link href="/">
+            <h1 className="text-4xl font-extrabold font-serif bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 text-transparent bg-clip-text drop-shadow-md">
+              Text<span className="italic">Ease</span>
+            </h1>
+          </Link>
+        </div>
 
-          <Link href={"/utils/Base64"} className="hover:text-pink-600">
-            <li>Base64 Converter</li>
-          </Link>
-          <Link href={"/utils/imagetotext"} className="hover:text-pink-600">
-            <li>Image to Text</li>
-          </Link>
-          <Link href={"/utils/urlshortener"} className="hover:text-pink-600">
-            <li>URL Shortener</li>
-          </Link>
-          <Link href={"/about"} className="hover:text-pink-600">
-            <li>About Us</li>
-          </Link>
-          <Link href={"/suggestions"} className="hover:text-pink-600">
-            <li>Suggestions</li>
-          </Link>
-        </ul>
-      </div>
-      <div className="flex items-center space-x-2 p-2">
+        {/* Links and Buttons for Medium and Large Screens */}
+        <div className="hidden md:flex items-center space-x-6">
+          {/* Utils Dropdown */}
+          <div
+            className="relative group"
+            onMouseEnter={() => setIsUtilsOpen(true)}
+            onMouseLeave={() => setIsUtilsOpen(false)}
+          >
+            <span className="text-lg font-semibold cursor-pointer group-hover:text-pink-600">
+              Utils
+            </span>
+            {isUtilsOpen && (
+              <motion.ul
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute top-12 left-0 bg-white dark:bg-[#0a0a0a] shadow-lg rounded-md w-72 z-50 p-4"
+              >
+                {[
+                  { href: "/utils/textutils", label: "TextUtils" },
+                  { href: "/utils/textcomparison", label: "Compare Text" },
+                  { href: "/utils/qrcodegenerator", label: "Generate QRCode" },
+                  { href: "/utils/wordcloud", label: "Word Cloud" },
+                  { href: "/utils/encryptdecrypt", label: "Encrypt & Decrypt" },
+                  { href: "/utils/markdown", label: "Markdown" },
+                  { href: "/utils/JSONMaker", label: "JSON Maker" },
+                  { href: "/utils/htmltoimage", label: "Html to Image" },
+                  { href: "/utils/texttoemoji", label: "Text to Emoji" },
+                ].map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="block px-3 py-2 rounded-md hover:bg-pink-600 hover:text-white transition"
+                  >
+                    <li>{label}</li>
+                  </Link>
+                ))}
+              </motion.ul>
+            )}
+          </div>
+
+          {/* Other Links */}
+          {[
+            { href: "/utils/imagetotext", label: "Image to Text" },
+            { href: "/utils/urlshortener", label: "URL Shortener" },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-lg font-semibold hover:text-pink-600 transition"
+            >
+              <li>{label}</li>
+            </Link>
+          ))}
+
+          {/* Buttons for Big Screens */}
+          <div className="flex space-x-4">
+            <button className="flex items-center px-4 py-2 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 rounded-lg shadow hover:shadow-lg transition">
+              <FaPhoneAlt className="mr-2" /> Contact Us
+            </button>
+            <button className="flex items-center px-4 py-2 text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 rounded-lg shadow hover:shadow-lg transition">
+              <FaShareAlt className="mr-2" /> Share
+            </button>
+           <ThemeSwitcher />
+          </div>
+        </div>
+
+        {/* Mobile Menu Button */}
         <button
-          type="button"
-          className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="block md:hidden text-2xl"
+          onClick={toggleMobileMenu}
         >
-          Contact Us
+          {isMobileMenuOpen ? <FiX /> : <FiMenu />}
         </button>
-
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        >
-          Share
-        </button>
-
-       
-          <ThemeSwitcher />
-        
       </div>
-    </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <motion.div
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          className="absolute top-0 left-0 w-3/4 h-screen bg-white shadow-lg p-6 z-50 md:hidden"
+        >
+          <div className="mb-4">
+          <Link href="/">
+            <h1 className="text-4xl font-extrabold font-serif bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 text-transparent bg-clip-text drop-shadow-md">
+              Text<span className="italic">Ease</span>
+            </h1>
+          </Link>
+        </div>
+          <ul className="space-y-6">
+            {/* Utils for Mobile */}
+            <div>
+              <div
+                className="text-lg text-gray-950 hover:text-pink-600 cursor-pointer flex items-center"
+                onClick={() => setIsUtilsOpen(!isUtilsOpen)}
+              >
+                Utils <span><FaArrowDown19 /></span>
+              </div>
+              {isUtilsOpen && (
+                <motion.ul
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-2 pl-4 space-y-2"
+                >
+                  {[
+                    { href: "/utils/textutils", label: "TextUtils" },
+                    { href: "/utils/textcomparison", label: "Compare Text" },
+                    { href: "/utils/qrcodegenerator", label: "Generate QRCode" },
+                    { href: "/utils/wordcloud", label: "Word Cloud" },
+                    { href: "/utils/encryptdecrypt", label: "Encrypt & Decrypt" },
+                    { href: "/utils/markdown", label: "Markdown" },
+                    { href: "/utils/JSONMaker", label: "JSON Maker" },
+                    { href: "/utils/htmltoimage", label: "Html to Image" },
+                    { href: "/utils/texttoemoji", label: "Text to Emoji" },
+                  ].map(({ href, label }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      className="block px-2 py-1 rounded-md hover:text-pink-600 text-gray-950 transition"
+                    >
+                      <li>{label}</li>
+                    </Link>
+                  ))}
+                </motion.ul>
+              )}
+            </div>
+
+            {/* Other Links for Mobile */}
+            {[
+              { href: "/utils/imagetotext", label: "Image to Text" },
+              { href: "/utils/urlshortener", label: "URL Shortener" },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-lg text-gray-950 hover:text-pink-600 transition"
+              >
+                <li>{label}</li>
+              </Link>
+            ))}
+
+            {/* Buttons for Mobile */}
+            <div className="flex flex-col space-y-4 mt-4">
+              <button className="flex items-center justify-center px-4 py-2 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 rounded-lg shadow hover:shadow-lg transition">
+                <FaPhoneAlt className="mr-2" /> Contact Us
+              </button>
+              <button className="flex items-center justify-center px-4 py-2 text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 rounded-lg shadow hover:shadow-lg transition">
+                <FaShareAlt className="mr-2" /> Share
+              </button>
+              <ThemeSwitcher />
+            </div>
+          </ul>
+        </motion.div>
+      )}
+    </nav>
   );
 };
 
