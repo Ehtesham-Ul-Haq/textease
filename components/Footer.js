@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-12 px-4">
+    <footer className="bg-gray-950 text-white py-12 px-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Subscribe Section */}
         <div className="space-y-4">

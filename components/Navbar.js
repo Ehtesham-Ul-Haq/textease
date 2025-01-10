@@ -1,8 +1,8 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Navbar = () => {
-  const [dropdown1, setDropdown1] = useState(false);
 
   return (
     <div className="w-full flex items-center justify-between border-b mb-2">
@@ -79,6 +79,10 @@ const Navbar = () => {
         >
           Share
         </button>
+
+       
+          <ThemeSwitcher />
+        
       </div>
     </div>
   );

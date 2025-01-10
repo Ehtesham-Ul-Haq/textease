@@ -46,7 +46,7 @@ const TextUtils = () => {
         rows="5"
         cols="30"
         placeholder="Type your text with :emoji_name: here..."
-        className="border-2 border-pink-500 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none w-full rounded p-2 overflow-y-hidden"
+        className="border-2 text-gray-950 border-pink-500 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none w-full rounded p-2 overflow-y-hidden"
       />
       <button
         onClick={convertToEmoji}
@@ -62,7 +62,7 @@ const TextUtils = () => {
       <h3 className="text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 font-medium rounded-full px-5 text-center">
         Result
       </h3>
-      <div className={`relative mt-10 p-6 border-2 border-lime-500 rounded-lg bg-white shadow-lg w-full max-w-3xl ${ text.length === 0 ? "hidden" : "block"}`}>
+      <div className={`relative mt-10 text-gray-950 p-6 border-2 border-lime-500 rounded-lg bg-white shadow-lg w-full max-w-3xl ${ text.length === 0 ? "hidden" : "block"}`}>
         {text}
       </div>
     </div>

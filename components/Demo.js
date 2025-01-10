@@ -4,6 +4,7 @@ import AnimatedText from "./AnimatedText";
 
 export default function Demo() {
   const [text, setText] = useState("");
+  
 
   const features = [
     { title: "Convert to Sentence Case", icon: "📝" },
@@ -57,8 +58,8 @@ export default function Demo() {
   ];
 
   return (
-    <div className="py-16 bg-gray-50">
-      <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
+    <div className="py-16 bg-gray-50 dark:bg-black">
+      <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">
         Try TextEase
       </h2>
       <h3 className="w-1/2 mx-auto text-2xl italic font-semibold">
@@ -67,7 +68,7 @@ export default function Demo() {
       </h3>
       <div className="max-w-2xl mx-auto">
         <textarea
-          className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+          className="w-full p-4 border border-gray-300 dark:bg-transparent rounded-lg mb-4"
           rows="5"
           placeholder="Type your text here..."
           value={text}

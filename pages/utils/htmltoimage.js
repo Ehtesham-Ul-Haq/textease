@@ -24,7 +24,7 @@ const HtmlToImage = () => {
       {/* Section to capture */}
       <div
         ref={elementRef}
-        className="w-full max-w-lg p-4 border border-gray-300 rounded-md bg-blue-100 text-center mb-6"
+        className="w-full max-w-lg p-4 border dark:text-gray-950 border-gray-300 rounded-md bg-blue-100 text-center mb-6"
       >
         <h2 className="text-lg font-semibold">Capture this section as an image</h2>
         <p className="text-sm mt-2">

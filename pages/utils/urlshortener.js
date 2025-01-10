@@ -40,7 +40,7 @@ const UrlShortener = () => {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Enter your URL"
-          className="w-full p-2 mb-4 border border-gray-300 rounded-md"
+          className="w-full p-2 mb-4 border text-gray-950 border-gray-300 rounded-md"
           required
         />
         <button

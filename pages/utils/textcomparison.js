@@ -32,14 +32,14 @@ const CompareText = () => {
       <div className="flex flex-col md:flex-row gap-6 w-full max-w-3xl mb-6">
         <textarea
           placeholder="Enter first text here..."
-          className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
           rows={6}
           value={text1}
           onChange={(e) => setText1(e.target.value)}
         />
         <textarea
           placeholder="Enter second text here..."
-          className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
           rows={6}
           value={text2}
           onChange={(e) => setText2(e.target.value)}

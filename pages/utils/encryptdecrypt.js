@@ -38,7 +38,7 @@ const TextEncryptor = () => {
       <div className="mb-4 w-full max-w-2xl">
         <textarea
           placeholder="Enter text to encrypt..."
-          className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
           rows={4}
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -49,7 +49,7 @@ const TextEncryptor = () => {
         <input
           type="text"
           placeholder="Enter secret key..."
-          className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400"
+          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400"
           value={secretKey}
           onChange={(e) => setSecretKey(e.target.value)}
         />
@@ -76,7 +76,7 @@ const TextEncryptor = () => {
         <div className="mb-4 w-full max-w-2xl">
           <h2 className="text-xl font-semibold text-pink-600">Encrypted Text</h2>
           <textarea
-            className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+            className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
             rows={4}
             readOnly
             value={encryptedText}
@@ -88,7 +88,7 @@ const TextEncryptor = () => {
         <div className="w-full max-w-2xl">
           <h2 className="text-xl font-semibold text-lime-600">Decrypted Text</h2>
           <textarea
-            className="p-4 border-2 border-lime-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-lime-400 resize-none"
+            className="p-4 border-2 text-gray-950 border-lime-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-lime-400 resize-none"
             rows={4}
             readOnly
             value={decryptedText}

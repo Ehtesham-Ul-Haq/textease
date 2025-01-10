@@ -41,7 +41,7 @@ const QRCodeGenerator = () => {
           placeholder="Enter text here..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
         />
         <div className="flex justify-between items-center">
         <button

@@ -30,7 +30,7 @@ export default function WordCloudPage() {
           onChange={handleTextChange}
           placeholder="Enter text here..."
           rows={8}
-          className="p-4 border-2 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
         />
 
         <div className="flex justify-center mt-8">
@@ -44,7 +44,7 @@ export default function WordCloudPage() {
       </div>
 
       {/* Word Cloud Component */}
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 border rounded-md">
         <WordCloudComp words={wordList} width={500} height={300} />
       </div>
     </div>

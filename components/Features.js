@@ -6,6 +6,7 @@ const FeatureCard = ({ title, icon }) => {
     triggerOnce: false,
     threshold: 0.2, // Trigger animation when 20% of the element is visible
   });
+  
 
   return (
     <motion.div
@@ -14,7 +15,7 @@ const FeatureCard = ({ title, icon }) => {
       animate={inView ? { y: 0, opacity: 1 } : {}}
       transition={{ duration: 1 }}
       whileHover={{ scale: 1.05 }}
-      className="p-4 bg-white rounded-lg shadow-md flex items-center gap-4 hover:shadow-lg"
+      className="p-4 bg-white dark:bg-gray-950 rounded-lg shadow-md flex items-center gap-4 hover:shadow-lg"
     >
       <div className="text-3xl">{icon}</div>
       <h3 className="text-lg font-semibold">{title}</h3>
@@ -75,9 +76,9 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="py-16 bg-white text-center">
-      <h2 className="text-3xl font-bold text-gray-800 mb-8">Features</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mx-2">
+    <div className="py-16 bg-white dark:bg-black text-center">
+      <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">Features</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mx-12">
       {features.map((feature, index) => (
           <FeatureCard key={index} title={feature.title} icon={feature.icon} />
         ))}

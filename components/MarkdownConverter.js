@@ -26,7 +26,7 @@ const MarkdownConverter = () => {
         
         <textarea
           placeholder="Enter your markdown text here..."
-          className="w-full h-screen p-2 mt-1 border border-gray-300 overflow-auto flex-grow flex-shrink text-xs"
+          className="w-full h-screen text-gray-950 p-2 mt-1 border border-gray-300 overflow-auto flex-grow flex-shrink text-xs"
           value={text}
           onChange={handleTextChange}
         />

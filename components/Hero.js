@@ -3,8 +3,9 @@ import Link from "next/link";
 import Typewriter from "./TypeWriter";
 
 export default function Hero() {
+  
   return (
-    <div className="bg-gradient-to-r from-lime-500 via-black to-pink-600 text-white text-center py-20">
+    <div className="bg-gray-950  text-white text-center py-20">
       <motion.h1
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

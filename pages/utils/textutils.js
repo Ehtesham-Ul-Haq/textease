@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { syllable } from "syllable";
 import { jsPDF } from 'jspdf';
+import keywordExtractor from "keyword-extractor";
 
 const TextUtils = () => {
   const [text, setText] = useState("");
@@ -360,6 +361,39 @@ function textToCSV() {
   link.click();
   }
 }
+
+const removeEmptyLines = () => {
+  saveForUndo();
+  const newText = text.split('\n').filter(line => line.trim() !== "").join('\n');
+  setText(newText);
+}
+
+const convertToLaTeX = () => {
+  saveForUndo();
+  const newText = `\\text{${text}}`;
+  setText(newText);
+}
+
+const highlightKeywords = () => {
+  saveForUndo();
+  // Extract keywords from the text
+  const extractedKeywords = keywordExtractor.extract(text, {
+    language: "english",
+    remove_digits: true,
+    return_changed_case: true,
+    remove_duplicates: true,
+  });
+
+  // Create a regex pattern for the extracted keywords
+  const regex = new RegExp(`\\b(${extractedKeywords.join("|")})\\b`, "gi");
+
+  // Replace keywords in the text with highlighted spans
+  const newText = text.replace(regex, (match) => `<span class="bg-yellow-400 font-bold px-1">${match}</span>`);
+  setText(newText);
+};
+
+
+
   
 
   const functionButtonNames = [
@@ -389,6 +423,9 @@ function textToCSV() {
     "<u>Underline Text</u>",
     "Text to PDF",
     "Text to CSV/Excel",
+    "Remove Empty Lines",
+    "Convert to Latex",
+    "Highlight Keywords",
   ];
 
   const functionHandlers = [
@@ -418,6 +455,9 @@ function textToCSV() {
     underlineText,
     textToPDF,
     textToCSV,
+    removeEmptyLines,
+    convertToLaTeX,
+    highlightKeywords,
   ];
 
   return (
@@ -437,7 +477,7 @@ function textToCSV() {
 
         </div>
         <textarea
-          className="border-2 border-pink-500 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none w-full rounded p-2 overflow-y-hidden"
+          className="border-2 text-gray-950 border-pink-500 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none w-full rounded p-2 overflow-y-hidden"
           value={text}
           onChange={handleOnChange}
           placeholder="Enter your text here"
@@ -514,12 +554,16 @@ function textToCSV() {
           Preview
         </h3>
         <div
-          className="mt-10 p-6 border-2 border-lime-500 rounded-lg bg-white shadow-lg w-full max-w-3xl"
+          className="mt-10 p-6 border-2 border-lime-500 rounded-lg bg-white text-gray-950 shadow-lg w-full max-w-3xl"
           style={textStyle}
         >
           {text.length > 0 ? text : "Enter text in the textbox to Preview"}
+          <div
+                      dangerouslySetInnerHTML={{ __html: text }}
+
+          />
         </div>
-      </div>
+        </div>
     </div>
   );
 };
