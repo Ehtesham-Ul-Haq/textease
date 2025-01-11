@@ -62,11 +62,11 @@ export default function Demo() {
       <h2 className="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">
         Try TextEase
       </h2>
-      <h3 className="w-1/2 mx-auto text-2xl italic font-semibold">
+      <h3 className="md:w-1/2 w-11/12 mx-auto text-2xl italic font-semibold min-h-24 md:min-h-max">
        TextEase delivers &nbsp; &#8594; &nbsp;
         <AnimatedText texts={features.map((feature) => feature.title)} />
       </h3>
-      <div className="max-w-2xl mx-auto">
+      <div className="md:w-1/2 w-11/12 mx-auto">
         <textarea
           className="w-full p-4 border border-gray-300 dark:bg-transparent rounded-lg mb-4"
           rows="5"
@@ -77,18 +77,18 @@ export default function Demo() {
         <div className="flex space-x-4">
           <button
             onClick={() => setText(text.toUpperCase())}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="bg-blue-500 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg"
           >
             Uppercase
           </button>
           <button
             onClick={() => setText(text.toLowerCase())}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg"
+            className="bg-green-500 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg"
           >
             Lowercase
           </button>
           <Link href={"/utils/textutils"}>
-            <button className="bg-red-500 text-white px-4 py-2 rounded-lg">
+            <button className="bg-red-500 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg">
               Check All Functions
             </button>
           </Link>

@@ -75,7 +75,7 @@ const Navbar = () => {
               href={href}
               className="text-lg font-semibold hover:text-pink-600 transition"
             >
-              <li>{label}</li>
+              <li className="list-none">{label}</li>
             </Link>
           ))}
 

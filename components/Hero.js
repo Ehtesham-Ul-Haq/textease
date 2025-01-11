@@ -18,8 +18,8 @@ export default function Hero() {
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2 }}
-        className="mt-4 text-lg"
-        style={{ minHeight: "2em" }}
+        className="mt-4"
+        style={{ minHeight: "2emm" }}
       >
         <Typewriter text="Transform your text in seconds. Simplify, Beautify, and Optimize." />
       </motion.p>

@@ -78,7 +78,7 @@ export default function Features() {
   return (
     <div className="py-16 bg-white dark:bg-black text-center">
       <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">Features</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mx-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-12">
       {features.map((feature, index) => (
           <FeatureCard key={index} title={feature.title} icon={feature.icon} />
         ))}
