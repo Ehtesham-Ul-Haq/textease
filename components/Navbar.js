@@ -49,7 +49,7 @@ const Navbar = () => {
                   { href: "/utils/wordcloud", label: "Word Cloud" },
                   { href: "/utils/encryptdecrypt", label: "Encrypt & Decrypt" },
                   { href: "/utils/markdown", label: "Markdown" },
-                  { href: "/utils/JSONMaker", label: "JSON Maker" },
+                  { href: "/utils/jsonmaker", label: "JSON Maker" },
                   { href: "/utils/htmltoimage", label: "Html to Image" },
                   { href: "/utils/texttoemoji", label: "Text to Emoji" },
                 ].map(({ href, label }) => (
@@ -81,9 +81,11 @@ const Navbar = () => {
 
           {/* Buttons for Big Screens */}
           <div className="flex space-x-4">
+            <Link href={'/contact'}>
             <button className="flex items-center px-4 py-2 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 rounded-lg shadow hover:shadow-lg transition">
               <FaPhoneAlt className="mr-2" /> Contact Us
             </button>
+            </Link>
             <button className="flex items-center px-4 py-2 text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 rounded-lg shadow hover:shadow-lg transition">
               <FaShareAlt className="mr-2" /> Share
             </button>
@@ -136,7 +138,7 @@ const Navbar = () => {
                     { href: "/utils/wordcloud", label: "Word Cloud" },
                     { href: "/utils/encryptdecrypt", label: "Encrypt & Decrypt" },
                     { href: "/utils/markdown", label: "Markdown" },
-                    { href: "/utils/JSONMaker", label: "JSON Maker" },
+                    { href: "/utils/jsonmaker", label: "JSON Maker" },
                     { href: "/utils/htmltoimage", label: "Html to Image" },
                     { href: "/utils/texttoemoji", label: "Text to Emoji" },
                   ].map(({ href, label }) => (
@@ -168,9 +170,11 @@ const Navbar = () => {
 
             {/* Buttons for Mobile */}
             <div className="flex flex-col space-y-4 mt-4">
-              <button className="flex items-center justify-center px-4 py-2 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 rounded-lg shadow hover:shadow-lg transition">
+              <Link href={'/contact'} className="flex items-center justify-center px-4 py-2 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 rounded-lg shadow hover:shadow-lg transition">
+              <button className="flex items-center">
                 <FaPhoneAlt className="mr-2" /> Contact Us
               </button>
+              </Link>
               <button className="flex items-center justify-center px-4 py-2 text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 rounded-lg shadow hover:shadow-lg transition">
                 <FaShareAlt className="mr-2" /> Share
               </button>
