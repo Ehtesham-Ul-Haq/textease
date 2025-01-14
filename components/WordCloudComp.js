@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import cloud from 'd3-cloud';
 import * as d3 from 'd3';
 
-const WordCloudComp = ({ words, width = 500, height = 300 }) => {
+const WordCloudComp = ({ words, width, height }) => {
   const svgRef = useRef();
 
   useEffect(() => {

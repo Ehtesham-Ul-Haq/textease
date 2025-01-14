@@ -20,7 +20,7 @@ export default function WordCloudPage() {
 
   return (
     <div className="flex flex-col items-center justify-center px-4 py-8">
-      <div className="p-6 max-w-3xl w-full">
+      <div className="p-6 w-full md:w-1/2 mx-auto">
         <h1 className="text-4xl font-bold text-pink-600 mb-8 text-center">
           Word Cloud Generator
         </h1>
@@ -44,8 +44,8 @@ export default function WordCloudPage() {
       </div>
 
       {/* Word Cloud Component */}
-      <div className="flex justify-center mt-8 border rounded-md">
-        <WordCloudComp words={wordList} width={500} height={300} />
+      <div className="flex justify-center w-full md:w-1/2 mt-8 border rounded-md">
+        <WordCloudComp words={wordList} width={300} height={300} />
       </div>
     </div>
   );

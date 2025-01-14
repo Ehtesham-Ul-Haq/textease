@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useRef } from 'react';
+import { FaCopy } from 'react-icons/fa';
 import Tesseract from 'tesseract.js';
 
 const ImageToText = () => {
@@ -27,31 +28,47 @@ const ImageToText = () => {
     });
   };
 
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    document.getSelection().removeAllRanges();
+    alert("Text is Copied!");
+  };
+
   return (
     <div className="flex flex-col items-center p-6">
       <h1 className="text-2xl font-bold mb-4 text-pink-600">Image to Text Converter</h1>
-      
-      <div className='flex justify-evenly items-center space-x-4'>
-        <div>
-      {/* Image Upload Section */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleImageUpload}
-        className="mb-4"
-      />
-      {image && (
-        <div>
-          <img src={image} alt="Uploaded" className="max-w-lg border border-gray-300 mb-4" />
-        </div>
-      )}
 
-</div>
-      {/* Display the Extracted Text */}
-      <div>
-        <h2 className="text-lg font-semibold text-lime-600 border-b border-pink-600">Extracted Text</h2>
-        <pre className="whitespace-pre-wrap">{text}</pre>
-      </div>
+      <div className='flex flex-col md:flex-row items-center space-x-0 md:space-x-4'>
+        <div className='flex flex-col items-center'>
+          {/* Image Upload Section */}
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleImageUpload}
+            className="mb-4"
+          />
+          {image && (
+            <div>
+              <img src={image} alt="Uploaded" className="border border-gray-300 mb-4" />
+            </div>
+          )}
+
+        </div>
+        {/* Display the Extracted Text */}
+        <div className='flex flex-col items-center'>
+          <h2 className="text-lg font-semibold text-lime-600 border-b border-pink-600">Extracted Text</h2>
+          <div className="relative group">
+            <pre className="whitespace-pre-wrap" onClick={() => handleCopy(text)}>{text}</pre>
+            <FaCopy
+              className="absolute top-0 right-0 cursor-pointer"
+              onClick={() => handleCopy(text)}
+            />
+            <span className="hidden group-hover:block text-gray-600 text-xs rounded px-2 py-1 absolute top-6 right-0 bg-white shadow-lg">
+              Click to Copy Text
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

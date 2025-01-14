@@ -396,37 +396,37 @@ const highlightKeywords = () => {
 
   
 
-  const functionButtonNames = [
-    "Convert to UpperCase",
-    "Convert to LowerCase",
-    "Capitalize First Letter",
-    "Clear Text",
-    "Copy Text to Clipboard",
-    "Text to Speech",
-    "Remove Extra Spaces",
-    "Convert to Sentence Case",
-    "Encode to Base64",
-    "Extract Numbers",
-    "Extract Links",
-    "Remove HTML Tags",
-    "Remove Special Characters",
-    "Paste from Clipboard",
-    "Reverse Text",
-    "Start Listening",
-    "Undo Action",
-    "Redo Action",
-    "Highlight Text",
-    "Find and Replace",
-    "Save as Text File",
-    "<b>Bold Text</b>",
-    "<i>Italic Text</i>",
-    "<u>Underline Text</u>",
-    "Text to PDF",
-    "Text to CSV/Excel",
-    "Remove Empty Lines",
-    "Convert to Latex",
-    "Highlight Keywords",
-  ];
+const functionButtonNames = [
+  "Uppercase",
+  "Lowercase",
+  "Capitalize",
+  "Clear",
+  "Copy",
+  "Text-to-Speech",
+  "Trim Spaces",
+  "Sentence Case",
+  "Base64 Encode",
+  "Extract Numbers",
+  "Extract Links",
+  "Remove HTML",
+  "Remove Symbols",
+  "Paste",
+  "Reverse",
+  "Listen",
+  "Undo",
+  "Redo",
+  "Highlight",
+  "Find/Replace",
+  "Save as TXT",
+  "Bold",
+  "Italic",
+  "Underline",
+  "Text to PDF",
+  "Text to CSV",
+  "Trim Empty Lines",
+  "Latex",
+  "Mark Keywords",
+];
 
   const functionHandlers = [
     handleUpClick,
@@ -462,13 +462,13 @@ const highlightKeywords = () => {
 
   return (
     <div>
-      <div className="w-1/2 mx-auto">
-        <h2 className="text-4xl font-bold text-pink-600 mb-8 text-center mt-4">
+      <div className="w-11/12 md:w-1/2 mx-auto">
+        <h2 className="text-2xl md:text-4xl font-bold text-pink-600 mb-8 text-center mt-4">
           TextEase - a Text Utility app
         </h2>
         <div className="relative">
           {/* <h2>Your text Summary</h2> */}
-          <span className="absolute bottom-1 left-0 text-white shadow-lg dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-full text-[12px] text-center justify-between flex w-full">
+          <span className="absolute bottom-1 left-0 text-white shadow-lg dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-full text-[10px] md:text-[12px] text-center justify-between flex w-full">
             <span className="bg-lime-600 px-4 rounded-full">{wordCount} words and {charCount} Characters</span>
             <span className="bg-lime-600 px-4 rounded-full">{countSyllables()} Syllables</span>
             <span className="bg-lime-600 px-4 rounded-full">{readingTime()} Minutes to read</span>
@@ -486,26 +486,32 @@ const highlightKeywords = () => {
           spellCheck={true} // Enables browser spell check
         />
       </div>
-      <div className="grid grid-cols-3 gap-2 items-center mx-auto w-1/2">
-        {functionButtonNames.map((name, index) => (
-          <button
-            key={index}
-            disabled={text.length === 0}
-            className={`relative group text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
-              text.length === 0
-                ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer"
-            }`}
-            onClick={functionHandlers[index]}
-          >
-            {name}
-            <span className="absolute bottom-full mb-1 hidden group-hover:block bg-gray-600 text-white text-xs rounded px-2 py-1">
-              {name}
-            </span>
-          </button>
-        ))}
-      </div>
-      <div className="grid grid-cols-3 gap-2 items-center mx-auto w-1/2">
+    
+
+
+<div className="grid grid-cols-2 gap-4 items-center mx-auto w-11/12 md:w-1/2 md:grid-cols-3 lg:grid-cols-4 my-4">
+  {functionButtonNames.map((name, index) => (
+    <button
+      key={index}
+      disabled={text.length === 0}
+      className={`relative group text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm sm:px-5 md:px-4 py-3 text-center transition-all duration-300 ease-in-out transform hover:scale-105 ${
+        text.length === 0
+          ? "opacity-50 cursor-not-allowed"
+          : "cursor-pointer"
+      }`}
+      onClick={functionHandlers[index]}
+    >
+      {name}
+      <span className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs rounded px-2 py-1 shadow-md">
+        {name}
+      </span>
+    </button>
+  ))}
+</div>
+
+
+
+      <div className="grid grid-cols-3 gap-2 items-center mx-auto w-11/12 md:w-1/2">
         <select
           onChange={(e) => changeFontFamily(e.target.value)}
           className={`text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-pink-500/50 dark:shadow-lg dark:shadow-pink-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
@@ -549,7 +555,7 @@ const highlightKeywords = () => {
           </option>
         </select>
       </div>
-      <div className="w-1/2 mx-auto my-2">
+      <div className="w-11/12 md:w-1/2 mx-auto my-2">
         <h3 className="text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 font-medium rounded-full px-5 text-center">
           Preview
         </h3>

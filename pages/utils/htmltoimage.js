@@ -19,12 +19,12 @@ const HtmlToImage = () => {
 
   return (
     <div className="flex flex-col items-center p-6">
-      <h1 className="text-2xl font-bold mb-4">HTML to Image Converter</h1>
+      <h1 className="text-4xl font-bold text-pink-600 mb-8 text-center">HTML to Image Converter</h1>
 
       {/* Section to capture */}
       <div
         ref={elementRef}
-        className="w-full max-w-lg p-4 border dark:text-gray-950 border-gray-300 rounded-md bg-blue-100 text-center mb-6"
+        className="w-full md:w-1/2 p-4 border dark:text-gray-950 border-gray-300 rounded-md bg-blue-100 text-center mb-6"
       >
         <h2 className="text-lg font-semibold">Capture this section as an image</h2>
         <p className="text-sm mt-2">
@@ -45,7 +45,7 @@ const HtmlToImage = () => {
         <img
           src={imageSrc} // Use the state value for the image source
           alt="Generated from HTML"
-          className="max-w-lg border border-gray-300 rounded-md shadow-md"
+          className="w-full md:w-1/2 border border-gray-300 rounded-md shadow-md"
         />
       )}
     </div>

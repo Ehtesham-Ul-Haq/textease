@@ -87,14 +87,14 @@ const CompareText = () => {
             ))}
             {result && (
               <button
-                className={`absolute right-0 bottom-1 group text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-1 text-center ${
+                className={`absolute right-0 bottom-1 group text-white bg-gradient-to-r from-lime-400 via-lime-500 to-lime-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-[8px] md:text-sm px-4 py-0 md:py-1 text-center ${
                   text1.length === 0 && text2.length === 0
                     ? "opacity-50 cursor-not-allowed"
                     : "cursor-pointer"
                 }`}
                 onClick={saveTextAsFile}
               >
-                <span className="bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 text-white px-2 py-1 rounded-r-full">Download</span> as Text File
+                <span className="text-[8px] md:text-sm bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 text-white px-2 py-0 md:py-1 rounded-r-full">Download</span> as Text File
               </button>
             )}
           </div>
