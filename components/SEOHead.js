@@ -115,6 +115,8 @@ const WSEOHead = ({ title, description, keywords, url }) => {
       {/* Favicon */}
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/favicon.ico" />
+        {/* google console */}
+      <meta name="google-site-verification" content="IyD2TfD0g0PP5B-dWgM5z-T2Yh5nG91tLwc8QqNDMj8" />
     </Head>
   );
 };
