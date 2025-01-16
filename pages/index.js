@@ -1,25 +1,28 @@
 import Demo from "@/components/Demo";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
+import WSEOHead from "@/components/SEOHead";
 import Head from "next/head";
 
 
 export default function LandingPage() {
 
- 
-  
+
+
   return (
-      <>
-      <Head>
-        <title>TextEase . Find Your Ease</title>
-        <link rel="icon" type="image/png" href="fevicon.webp" />
-      </Head>
-    <div>
-      <Hero />
-      <Features />
-      <Demo />
-    </div>
-      </>
+    <>
+      <WSEOHead
+        title="Home"
+        description="Discover a wide range of text tools, from text transformation to JSON generation, at TextEase."
+        keywords="text tools, JSON maker, spell check, text-to-emoji, QR code generator"
+        url="https://texteaseutils.vercel.app"
+      />
+      <div>
+        <Hero />
+        <Features />
+        <Demo />
+      </div>
+    </>
   );
 }
 
