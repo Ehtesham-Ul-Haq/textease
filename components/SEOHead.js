@@ -109,7 +109,7 @@ const WSEOHead = ({ title, description, keywords, url }) => {
           "Explore TextEase for text-to-JSON conversion, markdown generation, spell check, QR codes, and many more advanced tools!"
         }
       />
-      <meta name="twitter:image" content="/logo.png" />
+      <meta name="twitter:image" content="/logo.webp" />
       <meta name="twitter:site" content="@TextEase" />
 
       {/* Favicon */}
