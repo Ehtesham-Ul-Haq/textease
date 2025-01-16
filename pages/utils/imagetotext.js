@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import WSEOHead from '@/components/SEOHead';
 import { useState, useRef } from 'react';
 import { FaCopy } from 'react-icons/fa';
 import Tesseract from 'tesseract.js';
@@ -36,41 +37,50 @@ const ImageToText = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-6">
-      <h1 className="text-2xl font-bold mb-4 text-pink-600">Image to Text Converter</h1>
+    <>
+      <WSEOHead
+        title="Image to Text Converter - TextEase"
+        description="Extract text from images using OCR technology. Upload your image and get the text instantly."
+        keywords="image to text, OCR, extract text, image to text converter, Tesseract"
+        url="https://texteaseutils.vercel.app/utils/imagetotext"
+      />
 
-      <div className='flex flex-col md:flex-row items-center space-x-0 md:space-x-4'>
-        <div className='flex flex-col items-center'>
-          {/* Image Upload Section */}
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleImageUpload}
-            className="mb-4"
-          />
-          {image && (
-            <div>
-              <img src={image} alt="Uploaded" className="border border-gray-300 mb-4" />
-            </div>
-          )}
+      <div className="flex flex-col items-center p-6">
+        <h1 className="text-2xl font-bold mb-4 text-pink-600">Image to Text Converter</h1>
 
-        </div>
-        {/* Display the Extracted Text */}
-        <div className='flex flex-col items-center'>
-          <h2 className="text-lg font-semibold text-lime-600 border-b border-pink-600">Extracted Text</h2>
-          <div className="relative group">
-            <pre className="whitespace-pre-wrap" onClick={() => handleCopy(text)}>{text}</pre>
-            <FaCopy
-              className="absolute top-0 right-0 cursor-pointer"
-              onClick={() => handleCopy(text)}
+        <div className='flex flex-col md:flex-row items-center space-x-0 md:space-x-4'>
+          <div className='flex flex-col items-center'>
+            {/* Image Upload Section */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageUpload}
+              className="mb-4"
             />
-            <span className="hidden group-hover:block text-gray-600 text-xs rounded px-2 py-1 absolute top-6 right-0 bg-white shadow-lg">
-              Click to Copy Text
-            </span>
+            {image && (
+              <div>
+                <img src={image} alt="Uploaded" className="border border-gray-300 mb-4" />
+              </div>
+            )}
+
+          </div>
+          {/* Display the Extracted Text */}
+          <div className='flex flex-col items-center'>
+            <h2 className="text-lg font-semibold text-lime-600 border-b border-pink-600">Extracted Text</h2>
+            <div className="relative group">
+              <pre className="whitespace-pre-wrap" onClick={() => handleCopy(text)}>{text}</pre>
+              <FaCopy
+                className="absolute top-0 right-0 cursor-pointer"
+                onClick={() => handleCopy(text)}
+              />
+              <span className="hidden group-hover:block text-gray-600 text-xs rounded px-2 py-1 absolute top-6 right-0 bg-white shadow-lg">
+                Click to Copy Text
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

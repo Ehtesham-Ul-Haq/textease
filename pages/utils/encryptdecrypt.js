@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CryptoJS from 'crypto-js';
+import WSEOHead from '@/components/SEOHead';
 
 const TextEncryptor = () => {
   const [text, setText] = useState('');
@@ -32,70 +33,79 @@ const TextEncryptor = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-4xl font-bold text-pink-600 mb-8 text-center">Text Encryptor/Decryptor</h1>
+    <>
+      <WSEOHead
+        title="Text Encryptor/Decryptor - TextEase"
+        description="Encrypt and decrypt your text securely with a secret key. Protect your sensitive data using AES encryption."
+        keywords="Text encryption, AES encryption, decrypt text, secure encryption, TextEase encryptor"
+        url="https://texteaseutils.vercel.app/utils/encryptdecrypt"
+      />
 
-      <div className="mb-4 w-full max-w-2xl">
-        <textarea
-          placeholder="Enter text to encrypt..."
-          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
-          rows={4}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      </div>
+      <div className="flex flex-col items-center justify-center p-4">
+        <h1 className="text-4xl font-bold text-pink-600 mb-8 text-center">Text Encryptor/Decryptor</h1>
 
-      <div className="mb-4 w-full max-w-2xl">
-        <input
-          type="text"
-          placeholder="Enter secret key..."
-          className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400"
-          value={secretKey}
-          onChange={(e) => setSecretKey(e.target.value)}
-        />
-      </div>
-
-      <div className="flex gap-4 mb-6">
-        <button
-          className="bg-pink-500 text-white p-2 rounded-md"
-          onClick={handleEncrypt}
-          disabled={!text || !secretKey}
-        >
-          Encrypt
-        </button>
-        <button
-          className="bg-lime-500 text-white p-2 rounded-md"
-          onClick={handleDecrypt}
-          disabled={!encryptedText || !secretKey}
-        >
-          Decrypt
-        </button>
-      </div>
-
-      {encryptedText && (
         <div className="mb-4 w-full max-w-2xl">
-          <h2 className="text-xl font-semibold text-pink-600">Encrypted Text</h2>
           <textarea
+            placeholder="Enter text to encrypt..."
             className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
             rows={4}
-            readOnly
-            value={encryptedText}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
         </div>
-      )}
 
-      {decryptedText && (
-        <div className="w-full max-w-2xl">
-          <h2 className="text-xl font-semibold text-lime-600">Decrypted Text</h2>
-          <textarea
-            className="p-4 border-2 text-gray-950 border-lime-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-lime-400 resize-none"
-            rows={4}
-            readOnly
-            value={decryptedText}
+        <div className="mb-4 w-full max-w-2xl">
+          <input
+            type="text"
+            placeholder="Enter secret key..."
+            className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400"
+            value={secretKey}
+            onChange={(e) => setSecretKey(e.target.value)}
           />
         </div>
-      )}
-    </div>
+
+        <div className="flex gap-4 mb-6">
+          <button
+            className="bg-pink-500 text-white p-2 rounded-md"
+            onClick={handleEncrypt}
+            disabled={!text || !secretKey}
+          >
+            Encrypt
+          </button>
+          <button
+            className="bg-lime-500 text-white p-2 rounded-md"
+            onClick={handleDecrypt}
+            disabled={!encryptedText || !secretKey}
+          >
+            Decrypt
+          </button>
+        </div>
+
+        {encryptedText && (
+          <div className="mb-4 w-full max-w-2xl">
+            <h2 className="text-xl font-semibold text-pink-600">Encrypted Text</h2>
+            <textarea
+              className="p-4 border-2 text-gray-950 border-pink-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none"
+              rows={4}
+              readOnly
+              value={encryptedText}
+            />
+          </div>
+        )}
+
+        {decryptedText && (
+          <div className="w-full max-w-2xl">
+            <h2 className="text-xl font-semibold text-lime-600">Decrypted Text</h2>
+            <textarea
+              className="p-4 border-2 text-gray-950 border-lime-500 rounded-lg shadow-md w-full focus:outline-none focus:ring-2 focus:ring-lime-400 resize-none"
+              rows={4}
+              readOnly
+              value={decryptedText}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
