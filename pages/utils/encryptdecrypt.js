@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CryptoJS from 'crypto-js';
 import WSEOHead from '@/components/SEOHead';
+import Alert from '@/components/Alert';
 
 const TextEncryptor = () => {
   const [text, setText] = useState('');
@@ -24,6 +25,7 @@ const TextEncryptor = () => {
     const encrypted = encryptText(text, secretKey);
     setEncryptedText(encrypted);
     setDecryptedText(''); // Clear decrypted text when encrypting
+    Alert.success('Your text is encrypted!');
   };
 
   // Handle decryption
