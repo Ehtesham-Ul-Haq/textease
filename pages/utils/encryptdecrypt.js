@@ -32,6 +32,7 @@ const TextEncryptor = () => {
   const handleDecrypt = () => {
     const decrypted = decryptText(encryptedText, secretKey);
     setDecryptedText(decrypted);
+    Alert.success('Your text is decrypted!');
   };
 
   return (

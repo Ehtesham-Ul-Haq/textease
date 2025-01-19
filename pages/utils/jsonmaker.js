@@ -1,3 +1,4 @@
+import Alert from "@/components/Alert";
 import WSEOHead from "@/components/SEOHead";
 import { useState } from "react";
 
@@ -22,11 +23,20 @@ const JsonMaker = () => {
   const handleGenerateJSON = () => {
     try {
       const json = jsonMaker(inputText);
-      setJsonOutput(json);
+  
+      // Check if the generated JSON is empty
+      if (Object.keys(json).length === 0) {
+        Alert.error("Error: No valid key-value pairs found. Please provide input in 'key:value' format.");
+      } else {
+        setJsonOutput(json);
+        Alert.success("Your text is successfully converted to JSON!");
+      }
     } catch (error) {
       setJsonOutput({ error: "Invalid format. Please use key:value pairs." });
+      Alert.error("Error: An unexpected error occurred while processing your input.");
     }
   };
+  
 
   const handleDownloadJSON = () => {
     const blob = new Blob([JSON.stringify(jsonOutput, null, 2)], {
@@ -36,6 +46,7 @@ const JsonMaker = () => {
     link.href = URL.createObjectURL(blob);
     link.download = "data.json"; // Set default filename
     link.click();
+    Alert.success('Your JSON File is Downloading!');
   };
 
   return (
