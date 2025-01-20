@@ -3,6 +3,7 @@ import { syllable } from "syllable";
 import { jsPDF } from 'jspdf';
 import keywordExtractor from "keyword-extractor";
 import WSEOHead from "@/components/SEOHead";
+import Alert from "@/components/Alert";
 
 const TextUtils = () => {
   const [text, setText] = useState("");
@@ -88,25 +89,25 @@ const TextUtils = () => {
     saveForUndo();
     let newText = text.toUpperCase();
     setText(newText);
-    // showalert("Converted to Uppercase!","success")
+    Alert.success("Converted to Uppercase!");
   };
   const handleLowClick = () => {
     saveForUndo();
     let newText = text.toLowerCase();
     setText(newText);
-    // showalert("Converted to Lowercase!","success")
+    Alert.success("Converted to Lowercase!");
   };
   const handleClearClick = () => {
     saveForUndo();
     setText("");
-    // showalert("Text Cleared!","success")
+    Alert.success("Text is cleared!");
   };
 
   const handleCopy = () => {
     saveForUndo();
     navigator.clipboard.writeText(text);
     document.getSelection().removeAllRanges();
-    // showalert("Text Copied!","success")
+    Alert.success("Text Copied to Clipboard!");
   };
 
   const handleSpeak = () => {
@@ -114,7 +115,7 @@ const TextUtils = () => {
     let msg = new SpeechSynthesisUtterance();
     msg.text = text;
     window.speechSynthesis.speak(msg);
-    // showalert("Listen Your Text!","success")
+    Alert.success("Listen Your Text!");
   };
 
   const handleExtraSpaces = () => {
@@ -122,7 +123,7 @@ const TextUtils = () => {
     let newText = text.split(/[ ]+/);
 
     setText(newText.join(" "));
-    // showalert("Extra Spaces Removed!","success")
+    Alert.success("Extra spaces removed!");
   };
 
   const capitalizeFirstLetter = () => {
@@ -131,13 +132,13 @@ const TextUtils = () => {
     let capText = text.charAt(0).toUpperCase() + text.slice(1);
 
     setText(capText);
-    // showalert("First Letter Capitalized!","success")
+    Alert.success("First letter capitalized!");
   };
 
   const convertToSentenceCase = () => {
     saveForUndo();
 
-    let sentenseText = text
+    let sentenceText = text
       .split(/([.!?]\s*)/)
       .map(
         (sentence) =>
@@ -145,13 +146,17 @@ const TextUtils = () => {
       )
       .join("");
 
-    setText(sentenseText);
+    setText(sentenceText);
+    Alert.success("Converted to Sentence case!");
+
   };
 
   const encodeBase64 = () => {
     saveForUndo();
 
     setText(btoa(text));
+    Alert.success("Converted to Base64!");
+
   };
 
   const extractNumbers = () => {
@@ -165,6 +170,8 @@ const TextUtils = () => {
     const numbers = text.match(/\d+/g) || [];
 
     setText(numbers.join(" ")); // Convert the array of numbers back into a string
+    Alert.success("Numbers Extracted!");
+
   };
 
   const extractLinks = () => {
@@ -173,6 +180,8 @@ const TextUtils = () => {
     const links = text.match(/https?:\/\/[^\s]+/g) || [];
 
     setText(links.join("\n")); // Convert the array of links to a newline-separated string
+    Alert.success("Links Extracted!");
+
   };
 
   const removeHtmlTags = () => {
@@ -182,6 +191,8 @@ const TextUtils = () => {
     const newText = text.replace(/<[^>]*>/g, "");
 
     setText(newText);
+    Alert.success("Html tags are removed!");
+
   };
 
   const removeSpecialCharacters = () => {
@@ -190,6 +201,8 @@ const TextUtils = () => {
     const newText = text.replace(/[^a-zA-Z0-9 ]/g, "");
 
     setText(newText);
+    Alert.success("Special characters are removed!");
+
   };
 
   const pasteFromClipboard = async () => {
@@ -201,6 +214,7 @@ const TextUtils = () => {
 
       // Append the clipboard text to the existing text
       setText((prevText) => prevText + " " + clipboardText);
+      Alert.success("Paste from clipboard successfully!");
     } catch (error) {
       console.error("Failed to read clipboard contents: ", error);
     }
@@ -212,6 +226,8 @@ const TextUtils = () => {
     const newText = text.split("").reverse().join("");
 
     setText(newText);
+    Alert.success("Your text is reversed!");
+
   };
 
   const handleSpeechRecognition = () => {
@@ -223,6 +239,8 @@ const TextUtils = () => {
 
     if (!SpeechRecognition) {
       console.error("Speech Recognition is not supported in this browser");
+      Alert.success("Speech Recognition is not supported in this browser!");
+
       return;
     }
 
@@ -238,6 +256,7 @@ const TextUtils = () => {
     };
 
     recognition.start(); // Start listening for speech
+    Alert.success("Speech Recognition start successfully!");
   };
 
   const undo = () => {
@@ -246,6 +265,7 @@ const TextUtils = () => {
       setText(prevText);
       setUndoStack([...undoStack]);
       setRedoStack((prevStack) => [...prevStack, text]);
+      Alert.success("Undo successfully!");
     }
   };
 
@@ -255,6 +275,7 @@ const TextUtils = () => {
       setText(nextText);
       setRedoStack([...redoStack]);
       setUndoStack((prevStack) => [...prevStack, text]);
+      Alert.success("Redo successfully!");
     }
   };
 
@@ -264,6 +285,7 @@ const TextUtils = () => {
       ...prevStyle,
       fontFamily: fontFamily,
     }));
+    Alert.success("Font family changed for your text!");
   };
 
   const changeFontSize = (fontSize) => {
@@ -272,6 +294,8 @@ const TextUtils = () => {
       ...prevStyle,
       fontSize: fontSize,
     }));
+    Alert.success("Font size changed for your text!");
+
   };
 
   const setTextAlignment = (alignment) => {
@@ -280,12 +304,15 @@ const TextUtils = () => {
       ...prevStyle,
       textAlign: alignment,
     }));
+    Alert.success("Text alignment changed for your text!");
   };
 
   const highlightText = () => {
     saveForUndo();
     const highlightedText = text.replace(/\b(\w+)\b/g, "<mark>$1</mark>");
     setText(highlightedText);
+    Alert.success("Text highlighted!");
+
   };
 
   const handleFindAndReplace = () => {
@@ -295,6 +322,8 @@ const TextUtils = () => {
     if (find && replace !== null) {
       findAndReplace(find, replace);
     }
+    Alert.success("Find & Replace performed successfully!");
+
   };
 
   const findAndReplace = (find, replace) => {
@@ -306,7 +335,7 @@ const TextUtils = () => {
   const saveTextAsFile = () => {
     const filename = prompt(
       "Please enter the filename:",
-      "comparison_result.txt"
+      "file.txt"
     );
     if (filename) {
       const blob = new Blob([text], { type: "text/plain" });
@@ -314,6 +343,7 @@ const TextUtils = () => {
       link.href = URL.createObjectURL(blob);
       link.download = filename;
       link.click();
+      Alert.success("Your text file is downloading!");
     }
   };
 
@@ -321,30 +351,34 @@ const TextUtils = () => {
     saveForUndo();
     const newText = `<b>${text}</b>`;
     setText(newText);
+    Alert.success("Text styling to BOLD!");
   };
 
   const italicizeText = () => {
     saveForUndo();
     const newText = `<i>${text}</i>`;
     setText(newText);
+    Alert.success("Text styling to ITALIC!");
   };
 
   const underlineText = () => {
     saveForUndo();
     const newText = `<u>${text}</u>`;
     setText(newText);
+    Alert.success("Text styling to underline!");
   };
 
 
   const textToPDF = () => {
     const filename = prompt(
       "Please enter the filename:",
-      "comparison_result.pdf"
+      "file.pdf"
     );
     if (filename) {
       const doc = new jsPDF();
       doc.text(text, 10, 10);
       doc.save(`${filename}.pdf`);
+      Alert.success("Text file downloaded as PDF file!");
     }
   }
 
@@ -360,6 +394,7 @@ const TextUtils = () => {
       link.href = URL.createObjectURL(blob);
       link.download = 'data.csv';
       link.click();
+      Alert.success("Text file is downloaded as CSV file!");
     }
   }
 
@@ -367,12 +402,14 @@ const TextUtils = () => {
     saveForUndo();
     const newText = text.split('\n').filter(line => line.trim() !== "").join('\n');
     setText(newText);
+    Alert.success("Empty lines removed!");
   }
 
   const convertToLaTeX = () => {
     saveForUndo();
     const newText = `\\text{${text}}`;
     setText(newText);
+    Alert.success("Converted to LaTeX!");
   }
 
   const highlightKeywords = () => {
@@ -391,6 +428,7 @@ const TextUtils = () => {
     // Replace keywords in the text with highlighted spans
     const newText = text.replace(regex, (match) => `<span class="bg-yellow-400 font-bold px-1">${match}</span>`);
     setText(newText);
+    Alert.success("Keywords highlighted from Text!");
   };
 
 

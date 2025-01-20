@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Alert from '@/components/Alert';
 import WSEOHead from '@/components/SEOHead';
 import { useState, useRef } from 'react';
 import { FaCopy } from 'react-icons/fa';
@@ -33,7 +34,7 @@ const ImageToText = () => {
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
     document.getSelection().removeAllRanges();
-    alert("Text is Copied!");
+    Alert.success("Text Copied to clipboard!");
   };
 
   return (
