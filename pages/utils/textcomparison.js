@@ -114,7 +114,7 @@ const CompareText = () => {
             </div>
             {showModal && (
               <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div className="bg-white w-1/2 dark:bg-gray-800 p-6 rounded-md shadow-md">
+                <div className="bg-white w-11/12 md:w-1/2 dark:bg-gray-800 p-6 rounded-md shadow-md">
                   <h2 className="text-lg font-semibold mb-4">Enter File Name</h2>
                   <input
                     type="text"
