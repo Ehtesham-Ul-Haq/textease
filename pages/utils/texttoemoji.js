@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getUnicode } from "emoji-dictionary"; // Correctly import getUnicode
 import WSEOHead from "@/components/SEOHead";
+import Alert from "@/components/Alert";
 
 const TextUtils = () => {
   const [text, setText] = useState("");
@@ -13,7 +14,11 @@ const TextUtils = () => {
       const foundEmoji = getUnicode(emojiName); // Get emoji from name
       if (!foundEmoji) {
         setError(`No emoji found for name: "${emojiName}"`);
+        Alert.error(`No emoji found for name: "${emojiName}"`);
         return match; // Keep the original text
+      }
+      if (foundEmoji) {
+        Alert.success(`"${emojiName}" converted to "${foundEmoji}"`);
       }
       setError(""); // Clear error for valid emoji
       return foundEmoji; // Replace with emoji
@@ -21,10 +26,12 @@ const TextUtils = () => {
 
     if (!hasValidSyntax) {
       setError("Invalid syntax! Use the format :emoji_name:");
+      Alert.error("Invalid syntax! Use the format :emoji_name:");
       return;
     }
 
     setText(newText); // Update text only if syntax is valid
+
   };
 
   return (
